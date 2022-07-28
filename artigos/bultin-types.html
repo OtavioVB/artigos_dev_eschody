@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Artigo | BultIn Types (Tipos Internos)</title>
+   <meta http-equiv="content-language" content="pt-br">
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta name="author" content="Otávio Villas Boas">
+   <meta name="Otávio Villas Boas" content="Otávio Villas Boas">
+   <meta name="description" content="Entenda o que são os BultIn Types e como usá-los do modo correto, de forma a impactar positivamente no desempenho de suas aplicações e no uso adequado da memória">
+   <meta name="keywords" content="C#, BultIn Types, Linguagens de Programação, Software, Programação, Tipos internos, .NET, Uso adequado da Memória, Performance em Aplicações C#">
+   <meta property="og:type" content="website">
+   <meta property="og:locale" content="pt_BR">
+   <meta property="og:title" content="Fórum - Artigo | BultIn Types (Tipos Internos)">
+   <meta property="og:description" content="Entenda o que são os BultIn Types e como usá-los do modo correto, de forma a impactar positivamente no desempenho de suas aplicações e no uso adequado da memória">
+   <meta property="og:site_name" content="Artigo | BultIn Types (Tipos Internos)">
+   <meta property="og:image" content="../assets/imgs/eschody_favicon.png">
+   <link rel="icon" sizes="192x192" href="../assets/imgs/eschody_favicon.png">
+   <link rel="shortcut icon" href="../assets/imgs/eschody_favicon.png"/>
+   <link rel="stylesheet" href="../assets/styles/header/styles.css">
+   <link rel="stylesheet" href="../assets/styles/general/general.css">
+   <link rel="stylesheet" href="../assets/styles/footer/styles.css">
+   <link rel="stylesheet" href="../assets/styles/articles/main.css">
+</head>
+<body class="body-content">
+   <header>
+      <nav class="navigation">
+         <div class="title-site-page">
+            <h1 class="title-site-page-content" spellcheck="false"><a href="../index.html">Fórum do <strong>Eschody</strong></a></h1>
+            <p class="author-website">por <a class="link-author-github" href="https://github.com/OtavioVB">Otávio Villas Boas</a></p>
+         </div> 
+      </nav>
+   </header>
+   <main>
+      <p id="numerodoartigo" style="display: none;">3</p>
+      <section class="article-created-by-author">
+         <article class="article">
+            <div class="article-all-content">
+               <h1 class="title-article">Os <strong>tipos internos</strong> (BultIn Types)</h1>
+               <div class="category">
+                  <p class="category-value"><strong>C#</strong></p>
+                  <p class="category-value"><strong>BultIn Types</strong></p>
+                  <p class="category-value"><strong>Performance em Aplicações C#</strong></p>
+               </div>
+               <div class="main-content">
+                  <h2>Introdução</h2>
+                  <p class="normal-text">Como nós sabemos, a linguagem de programação <strong>C#</strong> é <a href="https://pt.wikipedia.org/wiki/Linguagem_tipada">fortemente tipada</a>, tendo isso em vista é necessário que nossas variáveis e constantes sejam declaradas de acordo com o seu verdadeiro tipo. Vale lembrar, que tais tipos não são especificados pela <a href="https://pt.wikipedia.org/wiki/C_Sharp">linguagem do C#</a> e sim no <a href="https://pt.wikipedia.org/wiki/Common_Language_Runtime">CLR</a> pela plataforma <a href="https://pt.wikipedia.org/wiki/.NET">.NET</a>. Desse modo, a nomenclatura que demos em nossas linhas de código, como "int", "string" são aliases do <a href="https://pt.wikipedia.org/wiki/.NET_Framework">.NET Framework.</a> realizadas pelo C#.</p>
+                  <h2>Os tipos internos</h2>
+                  <p class="normal-text">Os <strong>tipos internos</strong> foram especificados para que declaramos nossas variáveis de acordo com o seu <strong>verdadeiro tipo</strong>. Veja a lista <a href="https://docs.microsoft.com/pt-br/dotnet/csharp/language-reference/builtin-types/built-in-types">clicando aqui</a>. Ou veja os mais importantes:</p>
+                  <br>
+                  <ul>
+                     <li><b>byte </b> É o nome do <a href="https://pt.wikipedia.org/wiki/Alias_(comando)#:~:text=Em%20computa%C3%A7%C3%A3o%2C%20alias%20(em%20portugu%C3%AAs,por%20outra%20cadeia%20de%20caracteres.">alias</a> (nome representativo para referenciar outro nome, como um apelido) para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.byte?view=net-6.0">System.Byte</a>. Os valores que são suportados por esse tipo variam de 0 até 255.</li>
+                     <li><b>sbyte </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.sbyte?view=net-6.0">System.SByte</a>. Os valores que são suportados por esse tipo variam de -128 até 127.</li>
+                     <li><b>char </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.char?view=net-6.0">System.Char</a>. Esse tipo não suportam valores e sim um único caractere.</li>
+                     <li><b>double </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.double?view=net-6.0">System.Double</a>. Esse tipo também é flutuante, e aceita mais casas decimais depois da vírgula que o decimal. O double é usado para números de escalas extremamente pequenas que exigem uma grande precisão e escalas muito grande como a distância entre planetas.</li>
+                     <li><b>float </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.single?view=net-6.0">System.Single</a>. Esse tipo também é flutuante, e aceita menos casas decimais depois da vírgula que o decimal e o double.</li>
+                     <li><b>int </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.int32?view=net-6.0">System.Int32</a>. Esse tipo representa um inteiro que varia 2.147.483.648 negativos a 2.147.483.648 positivos.</li>
+                     <li><b>uint </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.uint32?view=net-6.0">System.UInt32</a>. Esse tipo representa um inteiro sem sinal que varia de 0 a 4.294.967.295</li>
+                     <li><b>short </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.int16?view=net-6.0">System.Int16</a>. Esse tipo representa um inteiro com sinal que varia de 32768 negativo a 32767 positivo.</li>
+                     <li><b>ushort </b> É o nome do alias para <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.uint32?view=net-6.0">System.UInt16</a>. Esse tipo representa um inteiro sem sinal que varia de 0 a 65535.</li>
+                  </ul>
+                  <br>
+                  <p class="normal-text">O que se pode se perceber com isso é que existem mais de um <b>tipo que engloba o mesmo valor.</b> Um exemplo é o número 5, podemos instanciá-los da seguinte forma:</p>
+                  <pre class="code">
+                     <code>
+                        short n1 = 5;
+                        ushort n2 = 5;
+                        int n3 = 5;
+                        uint n4 = 5;
+                     </code>
+                  </pre>
+                  <p class="normal-text">Isso acontece pelo fato de <b>short</b> ter um range de aproximadamente 30.000 inteiros negativos e 30.000 inteiros positivos, enquanto que <b>ushort</b> tem um range de aproximadamente 0 a 60.000 inteiros positivos, enquanto que <b>int</b> tem um range de aproximadamente 2 trilhões negativos a 2 trilhões positivos e enquanto que <b>uint</b> possui um range que varia de 0 a 4 trilhões positivos. Sendo assim, eles possuem <b>range que se coincidem</b>.</p>
+                  <p class="normal-text">Apesar disso, saber qual tipo a ser instanciado é uma boa prática para que não ocorra <b>operações desnecessárias</b> sendo realizadas pelos processadores além de um <strong>uso desnecessário da memória</strong>.</p>
+                  <p class="normal-text">O desenvolvedor <a href="https://www.luiztools.com.br/post/benchmark-de-tipos-de-variaveis/">Luiz Duarte</a> realizou alguns testes sobre o <b>custo de processamento</b> de cada tipo em um mesmo valor, veja os resultados a seguir, retirado de seu <a href="https://www.luiztools.com.br/post/benchmark-de-tipos-de-variaveis/">artigo</a>:</p>
+                  <img src="../assets/imgs/benchmark.png" alt="Luiz Duarte, Benchmark Tipos Primitivos">
+                  <p class="normal-text">Como pode-se perceber o tipo <b>decimal</b> possui um <b>alto custo de processamento</b>, sendo, aproximadamente 9,5x mais custoso que o <b>short</b>.</p>
+                  <p class="normal-text">Sendo assim, pode-se concluir que os tipos internos devem ser usados de acordo com a necessidade da aplicação, de modo a ter o menor custo para processamento e armazenamento de dados alocados na memória.</p>
+                  <h2>Vantagens do uso adequado do tipo interno</h2>
+                  <ul>
+                     <li>Menor uso da memória.</li>
+                     <li>Menor custo de processamento.</li>
+                  </ul>
+                  <h2>Estouro da Variável</h2>
+                  <p class="normal-text">Isso ocorre quando o <b>valor da variável excede o tamanho máximo suportado pelo tipo.</b> Normalmente, a aplicação retornará um erro chamado como <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.stackoverflowexception?view=net-6.0">StackOverflowException</a> ou <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.overflowexception?view=net-6.0">OverflowException</a>. Um exemplo é quando você possui uma variável denotada por um tipo como <b>short</b> e ocorre a tentativa de conversão de uma variável <b>int</b> para essa variável <b>short</b> em que seu valor excede o máximo suportado por <b>short</b>(+-32000).</p>
+                  <p class="normal-text">Veja a seguir um código com erro proposital:</p>
+                  <pre class="code">
+                     <code>
+                        static void Main(string[] args)
+                        {
+                           int NUMERO = 50000;
+                           try
+                           {
+                                 short VALOR = Convert.ToInt16(NUMERO);
+                           }
+                           catch (OverflowException)
+                           {
+                                 Console.WriteLine("Não foi possível realizar a operação");
+                           }
+                        }
+                     </code>
+                  </pre>
+                  <p class="normal-text">A mensagem de erro que seria retornada caso não houvesse o catch:</p>
+                  <p class="error-text"><b>System.OverflowException:</b> Valor era muito grande ou muito pequeno para Int16.</p>
+                  <p class="normal-text">Não é nada satisfatório um código com retorno em erro. Desse modo, caso você tenha <b>clareza</b> de que sua variável não excederá o range suportado por ela utilize normalmente, caso não, não arrisque, é muito mais custoso para o sistema um código retornando erro do que um código com o uso mínimo a mais de uma variável. Veja mais sobre nesse post do <a href="https://pt.stackoverflow.com/questions/5888/exce%C3%A7%C3%B5es-consomem-muito-processamento-verdade-ou-lenda">StackOverflow</a></p>
+                  <h2>Fontes Alternativas</h2>
+                  <li><a href="https://www.luiztools.com.br/post/benchmark-de-tipos-de-variaveis/">Luiz Duarte</a></li>
+               </div>
+            </div>
+            <div class="article-author-moment">
+               <p class="created-author">por <a href="https://github.com/OtavioVB" style="color: black;">Otávio Villas Boas</a> | 06/07/2022 às 20:35</p>
+            </div>
+         </article>
+      </section>
+   </main>
+   <footer>
+      <p class="direitos-autorais-text-otavio">Copyright © 2022, <strong>Eschody</strong>. Todos os direitos reservados | Em desenvolvimento por <a class="link-otavio" href="https://github.com/OtavioVB">Otávio Villas Boas</a></p>
+   </footer>
+</body>
+</html>

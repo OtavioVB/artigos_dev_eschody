@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Artigo | Como usar DataTable</title>
+   <meta http-equiv="content-language" content="pt-br">
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta name="author" content="Otávio Villas Boas">
+   <meta name="Otávio Villas Boas" content="Otávio Villas Boas">
+   <meta name="description" content="Entenda como funciona as DataTable e os impactos que ela possuem sobre o desenvolvimento de software.">
+   <meta name="keywords" content="C#, Tabela de Dados em C#, DataTable, Tabelas">
+   <meta property="og:type" content="website">
+   <meta property="og:locale" content="pt_BR">
+   <meta property="og:title" content="Fórum | Desenvolvedor Eschody">
+   <meta property="og:description" content="Eschody, fórum para desenvolvedores de software. Encontre aqui artigos sobre boas práticas na criação de aplicações para Web e Desktop.">
+   <meta property="og:site_name" content="Eschody">
+   <meta property="og:image" content="../assets/imgs/eschody_favicon.png">
+   <link rel="icon" sizes="192x192" href="../assets/imgs/eschody_favicon.png">
+   <link rel="shortcut icon" href="../assets/imgs/eschody_favicon.png"/>
+   <link rel="stylesheet" href="../assets/styles/header/styles.css">
+   <link rel="stylesheet" href="../assets/styles/general/general.css">
+   <link rel="stylesheet" href="../assets/styles/footer/styles.css">
+   <link rel="stylesheet" href="../assets/styles/articles/main.css">
+</head>
+<body class="body-content">
+   <header>
+      <nav class="navigation">
+         <div class="title-site-page">
+            <h1 class="title-site-page-content" spellcheck="false"><a href="../index.php">Fórum do <strong>Eschody</strong></a></h1>
+            <p class="author-website">por <a class="link-author-github" href="https://github.com/OtavioVB">Otávio Villas Boas</a></p>
+         </div> 
+      </nav>
+   </header>
+   <main>
+      <p id="numerodoartigo" style="display: none;">3</p>
+      <section class="article-created-by-author">
+         <article class="article">
+            <div class="article-all-content">
+               <h1 class="title-article">Como usar DataTable no desenvolvimento em C#?</h1>
+               <div class="category">
+                  <p class="category-value"><strong>C#</strong></p>
+                  <p class="category-value"><strong>DataTable</strong></p>
+                  <p class="category-value"><strong>Estrutura de Dados</strong></p>
+                  <p class="category-value"><strong>System.Data</strong></p>
+               </div>
+               <div class="main-content">
+                  <h2>Introdução</h2>
+                  <p class="normal-text">Uma <strong>DataTable</strong> é uma tabela de dados alocadas na memória. Ao contrário dos <b>arrays multidimensionais</b>, as DataTables podem apresentar mais de um tipo de dado, sendo representada, assim como, uma tabela de um banco de dados, por linhas e colunas. Veja na imagem a seguir:</p>
+                  <img src="../assets/imgs/datatable resume.png" alt="Resumo DataTable C#">
+                  <p class="normal-text">Como pode-se perceber, sua utilidade é bem intuitiva, representar os dados como uma tabela. É possível que você utilize um tipo de dado em uma coluna e outro tipo de dado em outra coluna, veja no exemplo a seguir:</p>
+                  <pre class="code">
+                     <code>
+                        using System.Data;
+
+                        public static void CRIAR_TABELA()
+                        {
+                           DataTable LISTA_DE_PESSOAS_CADASTRADAS = new DataTable("PESSOA");
+                           LISTA_DE_PESSOAS_CADASTRADAS.Columns.Add("ID", typeof(int));
+                           LISTA_DE_PESSOAS_CADASTRADAS.Columns.Add("Nome", typeof(string));
+                           LISTA_DE_PESSOAS_CADASTRADAS.Rows.Add(1, Otávio);
+                           LISTA_DE_PESSOAS_CADASTRADAS.Rows.Add(2, Júlio);
+                        }
+                     </code>
+                  </pre>
+                  <p class="normal-text">Desse modo, criamos uma tabela que pode ser representada dessa maneira:</p>
+                  <img src="../assets/imgs/092881328713-DATATABLE-IMG.png" alt="Representação de uma tabela com DataTable">
+                  <p class="normal-text">Para obtermos os <b>nomes</b> das pessoas presentes tabela pode-se realizar de duas formas:</p>
+                  <pre class="code">
+                     <code>
+                        public static void OBTER_NOMES_DA_TABELA(DataTable Tabela)
+                        {
+                              for (int i = 0; i &lt; Tabela.Rows.Count; i++)
+                              {
+                                 // ItemArray é o indexador da coluna (começa em 0, 1)
+                                 System.Console.WriteLine(Tabela.Rows[i].ItemArray[1]);
+                                 // ou
+                                 System.Console.WriteLine(Tabela.Rows[i].Field<string>("Nome"));
+                              }
+                        }
+                     </code>
+                  </pre>
+                  <p class="normal-text">Ou dessa forma:</p>
+                  <pre class="code">
+                     <code>
+                        public static void OBTER_NOMES_DA_TABELA(DataTable Tabela)
+                        {
+                           foreach(DataRow LINHA_DA_TABELA in Tabela.Rows)
+                           {
+                              Console.WriteLine(LINHA_DA_TABELA["Nome"]);
+                           }
+                        }
+                     </code>
+                  </pre>
+                  <p class="normal-text">Dessa maneira, podemos criar com a DataTable tabelas que necessitam de mais de um tipo de dados em sua coluna, como foi o caso do exemplo.</p>
+                  <h3>Tome Nota</h3>
+                  <p class="normal-text">DataTable possui o <strong>método dispose</strong> em sua classe, desse modo, pode-se fazer uma <b>liberação explicíta da memória.</b> Veja um pouco mais sobre isso <a href="../artigos/instrução-using.html">clicando aqui</a></p>
+                  <h2>Vantages do uso da DataTable</h2>
+                  <ul>
+                     <li>Resgatar dados de um banco de dados de forma legível para a manipulação dos dados.</li>
+                     <li>Organização de múltiplos dados</li>
+                     <li>Armazenamento de informações</li>
+                  </ul>
+                  <h2>Links Alternativos</h2>
+                  <ul>
+                     <li><a href="https://docs.microsoft.com/pt-br/dotnet/api/system.data.datatable?view=net-6.0">Documentação Microsoft</a></li>
+                     <li><a href="https://www.macoratti.net/15/08/c_dtbl1.htm">José Carlos Macoratti</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="article-author-moment">
+               <p class="created-author">por <a href="https://github.com/OtavioVB" style="color: black;">Otávio Villas Boas</a> | 05/07/2022 ás 09:51</p>
+            </div>
+         </article>
+      </section>
+   </main>
+   <footer>
+      <p class="direitos-autorais-text-otavio">Copyright © 2022, <strong>Eschody</strong>. Todos os direitos reservados | Em desenvolvimento por <a class="link-otavio" href="https://github.com/OtavioVB">Otávio Villas Boas</a></p>
+   </footer>
+</body>
+</html>

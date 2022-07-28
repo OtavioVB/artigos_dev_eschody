@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Artigo | Obsessão por Tipos Primitivos</title>
+   <meta http-equiv="content-language" content="pt-br">
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta name="author" content="Otávio Villas Boas">
+   <meta name="Otávio Villas Boas" content="Otávio Villas Boas">
+   <meta name="description" content="Entenda um pouco como funciona o uso da instrução using e seu impacto quanto a integridade, otimização e melhoras no seu código C#.">
+   <meta name="keywords" content="C#, Instrução Using, Otimização de Código, .NET Framework, Liberação de Recursos Não Gerenciados, Garbagge Collector, Coletor de Lixo, Liberação de Memória">
+   <meta property="og:type" content="website">
+   <meta property="og:locale" content="pt_BR">
+   <meta property="og:title" content="Fórum | Desenvolvedor Eschody">
+   <meta property="og:description" content="Eschody, fórum para desenvolvedores de software. Encontre aqui artigos sobre boas práticas na criação de aplicações para Web e Desktop.">
+   <meta property="og:site_name" content="Eschody">
+   <meta property="og:image" content="../assets/imgs/eschody_favicon.png">
+   <link rel="icon" sizes="192x192" href="../assets/imgs/eschody_favicon.png">
+   <link rel="shortcut icon" href="../assets/imgs/eschody_favicon.png"/>
+   <link rel="stylesheet" href="../assets/styles/header/styles.css">
+   <link rel="stylesheet" href="../assets/styles/general/general.css">
+   <link rel="stylesheet" href="../assets/styles/footer/styles.css">
+   <link rel="stylesheet" href="../assets/styles/articles/main.css">
+</head>
+<body class="body-content">
+   <header>
+      <nav class="navigation">
+         <div class="title-site-page">
+            <h1 class="title-site-page-content" spellcheck="false"><a href="../index.html">Fórum do <strong>Eschody</strong></a></h1>
+            <p class="author-website">por <a class="link-author-github" href="https://github.com/OtavioVB">Otávio Villas Boas</a></p>
+         </div> 
+      </nav>
+   </header>
+   <main>
+      <p id="numerodoartigo" style="display: none;">2</p>
+      <section class="article-created-by-author">
+         <article class="article">
+            <div class="article-all-content">
+               <h1 class="title-article">Instrução Using</h1>
+               <div class="category">
+                  <p class="category-value"><strong>C#</strong></p>
+                  <p class="category-value"><strong>.NET Framework</strong></p>
+                  <p class="category-value"><strong>Instrução Using</strong></p>
+                  <p class="category-value"><strong>Liberação de recursos não gerenciados</strong></p>
+               </div>
+               <div class="main-content">
+                  <h2>Introdução</h2>
+                  <p class="normal-text">O <strong>Instrução using</strong> é uma instrução que faz com que o objeto saia do escopo assim que o Método <a href="https://docs.microsoft.com/pt-br/dotnet/api/system.idisposable.dispose?view=net-6.0">Dispose</a> é chamado. Lembre-se não estamos falando da <i>diretiva using</i>, usada para importar todos os tipos de uma namespace, e sim do <strong>Instrução using</strong>. Tal Instrução é associado a <strong>liberação de recursos não gerenciados</strong> em C#.</p>
+                  <h2>Como funciona o Instrução using</h2>
+                  <p class="normal-text">De modo geral, o <strong>Instrução using</strong> está associado a <strong>liberação de recursos</strong> a partir do momento em que a classe referenciada possui um método chamado Dispose. O método <strong>Dispose</strong> é responsável por liberar os recursos não gerenciados. Vale lembrar que esses recursos são aqueles em que o <a href="https://docs.microsoft.com/pt-br/dotnet/standard/garbage-collection/fundamentals">Garbagge Collector</a> não reconhece, como identificadores de arquivos, identificadores de janela ou de conexão de rede, desse modo, requer uma referenciação explicíta para a liberação de memória.</p>
+                  <h2>Como usar a Instrução using</h2>
+                  <p class="normal-text">Para verificar se o objeto instanciado pode ser utilizado com o using, veja se ele herda a interface <strong>IDisposable</strong> e dentro de sua classe contenha o método <strong>Dispose()</strong>. Caso isso seja correto, você pode utilizar a instrução. Veja um exemplo: </p>
+                  <pre class="code">
+                     <code>
+                        public static void INSERIR_NO_BANCO()
+                        {
+                           try
+                           {
+                              MySqlCommand Comando = CONEXAO_BANCO().CreateCommand();
+                              Comando.CommandText = "INSERT INTO TABELA (N_ID) VALUES ('1');";
+                              Comando.ExecuteNonQuery();
+                           }
+                           catch
+                           {
+                              throw;
+                           }
+                           finally
+                           {
+                              CONEXAO_BANCO().Close();
+                           }
+                        }
+                     </code>
+                  </pre>
+                  <p class="normal-text">Como pode-se perceber estou instanciando o objeto chamado Comando. Irei na Classe MySqlCommand, apertando em cima dela F12 para verificar se ela contém a Interface e o Método:</p>
+                  <pre class="code">
+                     <code>
+                        public sealed class MySqlCommand : DbCommand, IDisposable, ICloneable
+                        {
+                           ...
+                           public new void Dispose()
+                           {
+                                 Dispose(disposing: true);
+                                 GC.SuppressFinalize(this);
+                           }
+                           ...
+                        }
+                     </code>
+                  </pre>
+                  <p class="normal-text">Como pode-se observar a classe MySqlCommand contém a Interface IDisposable. Desse modo, pode-se concluir que ela faz o uso de <strong>recursos não gerenciados</strong>, sendo a nossa ação necessária para a <strong>liberação explicíta da memória.</strong></p>
+                  <p class="normal-text">Para se realizar essa ação, use a instrução:</p>
+                  <pre class="code">
+                     <code>
+                        public static void INSERIR_NO_BANCO()
+                        {
+                           try
+                           {
+                              using(MySqlCommand Comando = CONEXAO_BANCO().CreateCommand())
+                              {
+                                 Comando.CommandText = "INSERT INTO TABELA (N_ID) VALUES ('1');";
+                                 Comando.ExecuteNonQuery();
+                              }
+                           }
+                           catch
+                           {
+                              throw;
+                           }
+                           finally
+                           {
+                              CONEXAO_BANCO().Close();
+                           }
+                        }
+                     </code>
+                  </pre>
+                  <p class="normal-text"><b>Tome Nota</b> Caso a classe não contenha uma interface IDisposable aparecerá uma mensagem de erro da seguinte forma:</p>
+                  <pre class="code">
+                     <code>
+                        Erro CS1674 'Nome da classe': o tipo usado em uma instrução using deve ser implicitamente conversível em 'System.IDisposable'.	Teste	C:\Users\Lenovo\source\repos\Teste\Teste\Program.cs	10	Ativo
+                     </code>
+                  </pre>
+                  <p class="normal-text">Veja um pouco mais sobre esse erro <a href="https://docs.microsoft.com/pt-br/dotnet/csharp/language-reference/compiler-messages/cs1674">clicando aqui</a></p>
+                  <h2><strong>Vantagens da utilização da Instrução Using</strong></h2>
+                  <ul>
+                     <li>
+                        <p class="normal-text">Otimização do código.</p>
+                     </li>
+                     <li>
+                        <p class="normal-text">Melhoras quanto ao desempenho da sua aplicação.</p>
+                     </li>
+                     <li>
+                        <p class="normal-text">Conexões com banco de dados fechadas corretamente.</p>
+                     </li>
+                  </ul>
+                  <h2><strong>Conclusão</strong></h2>
+                  <p class="normal-text">
+                     Sendo assim, pode-se dizer que a instrução using é um importante fator para a otimização do seu código, de modo na qual, ele se torne mais enxuto e limpo.
+                  </p>
+                  <h2>Fontes Alternativas</h2>
+                  <ul>
+                     <li><a href="https://docs.microsoft.com/pt-br/dotnet/csharp/language-reference/keywords/using-statement">Documentação Microsoft</a></li>
+                     <li><a href="https://www.devmedia.com.br/entendendo-o-bloco-using-no-csharp/16967">DevMedia</a></li>
+                  </ul>
+               </div>
+            </div>
+            <div class="article-author-moment">
+               <p class="created-author">por <a href="https://github.com/OtavioVB" style="color: black;">Otávio Villas Boas</a> | 03/07/2022 ás 11:18</p>
+            </div>
+         </article>
+      </section>
+   </main>
+   <footer>
+      <p class="direitos-autorais-text-otavio">Copyright © 2022, <strong>Eschody</strong>. Todos os direitos reservados | Em desenvolvimento por <a class="link-otavio" href="https://github.com/OtavioVB">Otávio Villas Boas</a></p>
+   </footer>
+</body>
+</html>

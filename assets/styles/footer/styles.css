@@ -1,0 +1,28 @@
+footer{
+   background-color: #111218;
+   position: fixed;
+   bottom: 0;
+   width: 100vw;
+   color: white;
+   box-sizing: content-box;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.direitos-autorais-text-otavio{
+   margin: 15px;
+   text-align: center;
+}
+
+.link-otavio{
+   text-decoration: none;
+   color: rgb(255, 102, 0);
+}
+
+@media screen and (max-width: 880px){
+   .direitos-autorais-text-otavio{
+      font-size: 12px;
+      margin: 6px;
+   }
+}

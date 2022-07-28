@@ -1,0 +1,109 @@
+.main-content h2{
+   margin-top: 15px;
+}
+
+.main-content img{
+   width: 100%;
+}
+
+.normal-strong{
+   color: black;
+   text-decoration: none;
+   font-weight: normal;
+}
+
+.main-content a{
+   font-weight: 600;
+}
+
+.title-article{
+   font-size: 28px;
+}
+
+.created-author{
+   font-size: 12px;
+   font-weight: bold;
+   margin-bottom: 15px;
+}
+
+.article-created-by-author{
+   width: 80vw;
+   margin-top: 5vh;
+   margin-bottom: 40vh;
+   margin-left: 10vw;
+   margin-right: 10vw;
+}
+
+.category{
+   box-sizing: content-box;
+   padding: 10px 0;
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.category-value{
+   color: rgb(0, 94, 110);
+   background-color: rgb(149, 194, 194);
+   padding: 5px;
+   margin-right: 5px;
+   margin-top: 2px;
+   border-radius: 4px;
+   font-size: 12px;
+}
+
+.main-content{
+   margin-top: 5px;
+   margin-bottom: 20px;
+}
+
+.article-like{
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: left;
+}
+
+#heart-like{
+   height: 8vh;
+   width: 8vh;
+   transition: .3s;
+}
+
+#heart-like:hover{
+   transform: translateY(-3px);
+}
+
+.normal-text{
+   padding: 5px 0;
+}
+
+.error-text{
+   padding: 10px 10px;
+   color: red;
+   background-color: rgb(255, 200, 200);
+   border-radius: 5px;
+   margin: 20px 0;
+}
+
+ul{
+   padding-left: 35px;
+}
+
+.fonte a{
+   text-decoration: none;
+}
+
+pre{
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+
+pre.code{
+   background-color: #2e2e2e;
+   border-radius: 5px;
+   overflow-x: scroll;
+}
+
+pre.code code{
+   color: white;
+}
